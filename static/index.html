@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0f0f1a" />
+  <title>HCI — Hermes Control Interface</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/theme.css" />
+</head>
+<body>
+  <!-- LOGIN OVERLAY -->
+  <div id="login-overlay" class="overlay">
+    <div class="login-card">
+      <div class="login-brand">Hermes Control Interface</div>
+      <div class="login-sub">Enter credentials to continue</div>
+      <form id="login-form" class="login-form" onsubmit="doLogin(event)">
+        <input id="login-username" type="text" placeholder="Username" autocomplete="username" />
+        <input id="login-password" type="password" placeholder="Password" autocomplete="current-password" />
+        <button type="submit" class="btn btn-primary" id="login-btn">unlock</button>
+      </form>
+      <div id="login-error" class="login-error"></div>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app" style="display:none;">
+    <aside id="sidebar">
+      <div class="sidebar-brand"><span class="brand-icon">H</span><span>Hermes Control</span></div>
+      <nav class="sidebar-nav" id="side-nav">
+        <div class="side-section">
+          <div class="side-section-title" onclick="toggleSection('sec-main')"><span class="side-section-arrow" id="arrow-sec-main">▾</span> MAIN</div>
+          <div class="side-section-items" id="items-sec-main">
+            <a href="#" class="side-link active" data-page="home"><span class="side-icon">H</span> Home</a>
+          </div>
+        </div>
+        <div class="side-divider"></div>
+        <div class="side-section">
+          <div class="side-section-title" onclick="toggleSection('sec-ai')"><span class="side-section-arrow" id="arrow-sec-ai">▾</span> AI & AGENTS</div>
+          <div class="side-section-items" id="items-sec-ai">
+            <a href="#" class="side-link" data-page="agents">Agents</a>
+            <a href="#" class="side-link" data-page="skills">Skills</a>
+            <a href="#" class="side-link" data-page="models">Models</a>
+            <a href="#" class="side-link" data-page="chat">Chat</a>
+          </div>
+        </div>
+        <div class="side-divider"></div>
+        <div class="side-section">
+          <div class="side-section-title" onclick="toggleSection('sec-mon')"><span class="side-section-arrow" id="arrow-sec-mon">▾</span> MONITORING</div>
+          <div class="side-section-items" id="items-sec-mon">
+            <a href="#" class="side-link" data-page="history">History</a>
+            <a href="#" class="side-link" data-page="monitor">Monitor</a>
+            <a href="#" class="side-link" data-page="usage">Usage</a>
+            <a href="#" class="side-link" data-page="sessions">Sessions</a>
+            <a href="#" class="side-link" data-page="cron">Cron</a>
+            <a href="#" class="side-link" data-page="logs">Logs</a>
+          </div>
+        </div>
+        <div class="side-divider"></div>
+        <div class="side-section">
+          <div class="side-section-title" onclick="toggleSection('sec-sys')"><span class="side-section-arrow" id="arrow-sec-sys">▾</span> SYSTEM</div>
+          <div class="side-section-items" id="items-sec-sys">
+            <a href="#" class="side-link" data-page="files">Files</a>
+            <a href="#" class="side-link" data-page="config">Config</a>
+          </div>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <span id="user-name-side">admin</span>
+        <button class="icon-btn" onclick="doLogout()" title="Logout">X</button>
+      </div>
+    </aside>
+
+    <div id="sidebar-backdrop" class="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <div id="main-wrap">
+      <header id="topbar">
+        <button class="hamburger" id="hamburger" onclick="toggleSidebar()">=</button>
+        <div class="topbar-title" id="topbar-title">Home</div>
+        <div class="topbar-right">
+          <span class="live-dot" id="live-dot" style="display:none;"></span>
+          <button class="icon-btn" onclick="refreshCurrentPage()">R</button>
+          <span class="clock" id="clock"></span>
+        </div>
+      </header>
+      <main id="main">
+        <div id="page-home" class="page"></div>
+        <div id="page-chat" class="page"></div>
+        <div id="page-agents" class="page"></div>
+        <div id="page-skills" class="page"></div>
+        <div id="page-models" class="page"></div>
+        <div id="page-history" class="page"></div>
+        <div id="page-monitor" class="page"></div>
+        <div id="page-usage" class="page"></div>
+        <div id="page-sessions" class="page"></div>
+        <div id="page-cron" class="page"></div>
+        <div id="page-logs" class="page"></div>
+        <div id="page-files" class="page"></div>
+        <div id="page-config" class="page"></div>
+      </main>
+    </div>
+    <div id="toast" class="toast" style="display:none;"></div>
+  </div>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
